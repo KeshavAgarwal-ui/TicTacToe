@@ -88,14 +88,12 @@ const playTurn = (e)=>{
             turn.style.color = 'blue';
             turn.innerText = 'O';
             boxesOfX.push(e.target);
-            movesOfX++;
         }
         else{
             e.target.style.color = 'blue';
             turn.style.color = 'red';
             turn.innerText = 'X';
             boxesOfO.push(e.target);
-            movesOfO++;
         }
         moves++;
         if(boxesOfX.length == 4){
@@ -112,6 +110,7 @@ const playTurn = (e)=>{
             boxesOfO[0].innerHTML = "";
             boxesOfO.shift();
         }
+        console.log(boxesOfX,boxesOfO);
         checkWinners();
     }
 }
