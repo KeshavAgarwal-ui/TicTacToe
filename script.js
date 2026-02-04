@@ -1,17 +1,21 @@
 let box = document.querySelectorAll(".box");
 let turn = document.querySelector("#turn");
 let restart = document.querySelector("#restart");
-let moves = 0;
 let msgContainer = document.querySelector("#msg-container");
 let msg = document.querySelector("#msg");
+let movesMessage = document.querySelector("#movesMessage");
 let newGame = document.querySelector("#new-game");
 
+let moves = 0;
+
+let boxesOfX = [];
+let boxesOfO = [];
+
+
 const showWinner = (winner) => {
-    if(winner==="Draw"){
-        msg.innerHTML = "It's a <b>Draw</b>";
-    } else {
-        msg.innerHTML = `<b>${winner}</b> is the Winner`;
-    }
+    let color = (winner.toLowerCase() == "x") ? "red" : "blue";
+    msg.innerHTML = `<b style="color: ${color}; text-transform: uppercase;">${winner}</b> is the Winner`;
+    movesMessage.innerHTML = `Game Ended After: <b>${moves} moves</b>`;
     msgContainer.classList.remove("hide");
     disableAllboxes();
 };
@@ -52,10 +56,6 @@ const checkWinners = () => {
             }
         }
     }
-    if(moves>=9){
-            console.log("Game Draw");
-            showWinner("Draw");
-        }
 }
 
 const hoverInEffect = (e)=>{
@@ -87,14 +87,31 @@ const playTurn = (e)=>{
             e.target.style.color = 'red';
             turn.style.color = 'blue';
             turn.innerText = 'O';
+            boxesOfX.push(e.target);
+            movesOfX++;
         }
         else{
             e.target.style.color = 'blue';
             turn.style.color = 'red';
             turn.innerText = 'X';
+            boxesOfO.push(e.target);
+            movesOfO++;
         }
         moves++;
-        console.log(moves);
+        if(boxesOfX.length == 4){
+            boxesOfX[0].classList.remove('placed');
+            boxesOfX[0].addEventListener('mouseover',hoverInEffect);
+            boxesOfX[0].addEventListener('mouseout',hoverOutEffect);
+            boxesOfX[0].innerHTML = "";
+            boxesOfX.shift();
+        }
+        if(boxesOfO.length == 4){
+            boxesOfO[0].classList.remove('placed');
+            boxesOfO[0].addEventListener('mouseover',hoverInEffect);
+            boxesOfO[0].addEventListener('mouseout',hoverOutEffect);
+            boxesOfO[0].innerHTML = "";
+            boxesOfO.shift();
+        }
         checkWinners();
     }
 }

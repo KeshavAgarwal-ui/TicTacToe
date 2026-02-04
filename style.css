@@ -116,9 +116,20 @@ span{
     font-weight: bold;
     margin-bottom: 1.5rem;
 }
+
+#movesMessage {
+    color: #333;
+    font-size: 4vmin;
+    margin-bottom: 1.5rem;
+}
 .hide {
     display: none;
 }
+
+.winner{
+    text-transform: uppercase !important;
+}
+
 #new-game {
     padding: 1rem 2rem;
     font-size: 1.2rem;
