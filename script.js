@@ -85,17 +85,20 @@ const playTurn = (e)=>{
         e.target.style.color = 'white';
         if(turn.innerText === 'X'){
             e.target.style.color = 'red';
+            e.target.style.opacity = 1;
             turn.style.color = 'blue';
             turn.innerText = 'O';
             boxesOfX.push(e.target);
         }
         else{
             e.target.style.color = 'blue';
+            e.target.style.opacity = 1;
             turn.style.color = 'red';
             turn.innerText = 'X';
             boxesOfO.push(e.target);
         }
         moves++;
+        
         if(boxesOfX.length == 4){
             boxesOfX[0].classList.remove('placed');
             boxesOfX[0].addEventListener('mouseover',hoverInEffect);
@@ -109,6 +112,14 @@ const playTurn = (e)=>{
             boxesOfO[0].addEventListener('mouseout',hoverOutEffect);
             boxesOfO[0].innerHTML = "";
             boxesOfO.shift();
+        }
+
+        if(boxesOfX.length == 3){
+             boxesOfX[0].style.color = "rgba(255, 0, 0, 0.5)";
+        }
+
+        if(boxesOfO.length == 3){
+            boxesOfO[0].style.color = "rgba(0, 0, 255, 0.5)";
         }
         console.log(boxesOfX,boxesOfO);
         checkWinners();
